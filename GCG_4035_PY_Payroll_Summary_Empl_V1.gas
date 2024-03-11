@@ -1,0 +1,218 @@
+Program.Sub.ScreenSU.Start
+gui.Form1..create
+gui.Form1..caption("Payroll Summary Report by Employee")
+gui.Form1..size(4380,4650)
+gui.Form1..minx(0)
+gui.Form1..miny(0)
+gui.Form1..position(0,0)
+gui.Form1..event(unload,form1_unload)
+gui.Form1..alwaysontop(False)
+gui.Form1..fontname("Arial")
+gui.Form1..fontsize(8)
+gui.Form1..forecolor(0)
+gui.Form1..fontstyle(,,,,)
+gui.Form1..BackColor(-2147483633)
+gui.Form1..controlbox(True)
+gui.Form1..maxbutton(True)
+gui.Form1..minbutton(True)
+gui.Form1..mousepointer(0)
+gui.Form1..moveable(True)
+gui.Form1..sizeable(True)
+gui.Form1..ShowInTaskBar(True)
+gui.Form1..titlebar(True)
+gui.Form1.frame1.create(frame)
+gui.Form1.frame1.caption("Pay Date")
+gui.Form1.frame1.size(3225,2205)
+gui.Form1.frame1.position(350,200)
+gui.Form1.frame1.visible(True)
+gui.Form1.frame1.fontname("Arial")
+gui.Form1.frame1.fontsize(10)
+gui.Form1.datepicker1.create(datepicker)
+gui.Form1.datepicker1.visible(True)
+gui.Form1.datepicker1.size(1935,285)
+gui.Form1.datepicker1.zorder(0)
+gui.Form1.datepicker1.position(655,565)
+gui.Form1.datepicker1.enabled(True)
+gui.Form1.datepicker1.parent("frame1")
+gui.Form1.datepicker1.checkbox(False)
+gui.Form1.datepicker1.defaultvalue("")
+gui.Form1.datepicker1.controlgroup(0)
+gui.Form1.frame2.create(frame)
+gui.Form1.frame2.caption("")
+gui.Form1.frame2.visible(True)
+gui.Form1.frame2.size(3285,135)
+gui.Form1.frame2.zorder(0)
+gui.Form1.frame2.position(280,3150)
+gui.Form1.frame2.enabled(True)
+gui.Form1.frame2.fontname("Arial")
+gui.Form1.frame2.fontsize(8)
+gui.Form1.cmdOK.create(button)
+gui.Form1.cmdOK.caption("Ok")
+gui.Form1.cmdOK.visible(True)
+gui.Form1.cmdOK.size(855,375)
+gui.Form1.cmdOK.zorder(0)
+gui.Form1.cmdOK.position(350,2750)
+gui.Form1.cmdOK.enabled(True)
+gui.Form1.cmdOK.fontname("Arial")
+gui.Form1.cmdOK.fontsize(8)
+gui.Form1.cmdOK.event(click,cmdok_click)
+gui.Form1.cmdOK.defaultvalue("")
+gui.Form1.cmdOK.controlgroup(0)
+gui.Form1.cmdcncl.create(button)
+gui.Form1.cmdcncl.caption("Cancel")
+gui.Form1.cmdcncl.visible(True)
+gui.Form1.cmdcncl.size(855,375)
+gui.Form1.cmdcncl.zorder(0)
+gui.Form1.cmdcncl.position(1350,2750)
+gui.Form1.cmdcncl.enabled(True)
+gui.Form1.cmdcncl.fontname("Arial")
+gui.Form1.cmdcncl.fontsize(8)
+gui.Form1.cmdcncl.event(click,form1_unload)
+gui.Form1.cmdcncl.defaultvalue("")
+gui.Form1.cmdcncl.controlgroup(0)
+gui.Form1.lbl1.create(label,"GCG_PY_Payroll_Summary_Empl.rpt",True,2025,255,1,145,3845,True,0,Arial,6,-2147483633,0)
+gui.Form1.lbl1.defaultvalue("")
+gui.Form1.lbl1.controlgroup(0)
+gui.Form1.lbl2.create(label,"BI103",True,1125,255,1,2660,3845,True,1,Arial,6,-2147483633,0)
+gui.Form1.lbl2.defaultvalue("")
+gui.Form1.lbl2.controlgroup(0)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+
+Variable.Global.iBiLogID.Declare(Long,0)
+Variable.Global.iBiRunID.Declare(Long,0)
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+F.Intrinsic.Control.SetErrorHandler("Main_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+Gui.Form1..Show
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("Main_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_PY_Payroll_Summary_Empl_V1.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.Main.End
+
+program.sub.form1_unload.start
+F.Intrinsic.Control.SetErrorHandler("form1_unload_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+F.Intrinsic.Control.End
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("form1_unload_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_PY_Payroll_Summary_Empl_V1.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.End
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.form1_unload.end
+
+program.sub.cmdok_click.start
+F.Intrinsic.Control.SetErrorHandler("cmdok_click_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+V.Local.sParams.Declare(String)
+V.Local.sParamVals.Declare(String)
+V.Local.sCaller.Declare(String)
+V.Local.sDate.Declare(String)
+V.Local.sValues.Declare(String)
+V.Local.iRet.Declare(Long)
+
+V.local.sCaller.Set(V.Caller.User)
+'Checks to see if there are more than one user with the same User ID.
+F.Intrinsic.Control.CallSub(Checkid)
+
+F.Global.BI.GetRunID(V.Global.iBiRunID)
+F.Global.BI.StartLogging(V.Global.iBiRunID,-1,-1,"",V.Global.iBiLogID)
+F.Intrinsic.Debug.DumpVariableList
+
+'Values to be passed as report parameters
+
+F.Intrinsic.Control.If(V.Local.sCaller,=,"")
+	F.Intrinsic.UI.Msgbox("User ID not recognized","Unable to Print Report")
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.String.Format(V.Screen.Form1!datepicker1.Value,"yyyymmdd",V.Local.sDate)
+
+''Paremeter names in Report
+V.Local.sParams.Set("PayDate*!*Caller")
+'Paremeter values
+F.Intrinsic.String.Concat(V.Local.sDate,"*!*",V.Local.sCaller.Trim,V.Local.sParamVals)
+
+Gui.Form1..Visible(false)
+
+'F.Global.BI.PrintReport(100012,0,V.Local.sParams,V.Local.sParamVals,"",False)
+
+F.Global.BI.StopLogging(V.global.iBiLogID)
+F.Global.BI.RunReportPreProcessor(V.Global.iBiRunID,V.Global.iBiLogID,V.Local.sParams,V.Local.sParamVals,"",-1,True,"",-1,"",-1,"","",V.local.iRet)
+
+F.Intrinsic.Control.CallSub(Form1_unload)
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("cmdok_click_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_PY_Payroll_Summary_Empl_V1.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+	F.Intrinsic.Control.CallSub(Form1_unload)
+Function.Intrinsic.Control.EndIf
+
+
+program.sub.cmdok_click.end
+
+Program.Sub.CheckID.Start
+F.Intrinsic.Control.SetErrorHandler("CheckID_Err")
+F.Intrinsic.Control.ClearErrors
+
+V.Local.sError.Declare(String)
+
+
+V.Local.sSQL.Declare
+V.Local.sCaller.Declare(String)
+
+F.Intrinsic.String.Build("SELECT COUNT(PR_USER_ID) FROM EMPLOYEE_MSTR WHERE PR_USER_ID = '{0}'",V.Caller.User,V.Local.sSQL)
+
+Function.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PUser,V.Ambient.PPass)
+F.ODBC.Connection!conx.OpenRecordsetRO("rst",V.Local.sSQL)
+F.Intrinsic.Control.If(V.ODBC.conx!rst.FieldValTrim!EXPR_1,>,1)
+	F.Intrinsic.UI.Msgbox("There are multiple users with the samer User ID","Unable to Print Report")
+	F.ODBC.conx!rst.Close
+	F.ODBC.Connection!conx.Close
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.ExitSub
+
+F.Intrinsic.Control.Label("CheckID_Err")
+F.Intrinsic.Control.If(V.Ambient.ErrorNumber,<>,0)
+	Function.Intrinsic.String.Concat("Project: GCG_PY_Payroll_Summary_Empl_V1.gas",V.Ambient.Newline,V.Ambient.Newline,"Subroutine: ",V.Ambient.CurrentSubroutine,V.Ambient.NewLine,"Error Occurred ",V.Ambient.ErrorNumber," with description ",V.Ambient.ErrorDescription,V.Local.sError)
+	F.Intrinsic.UI.Msgbox(V.Local.sError)
+Function.Intrinsic.Control.EndIf
+
+
+Program.Sub.CheckID.End
+
+
